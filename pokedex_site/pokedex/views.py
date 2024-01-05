@@ -1,10 +1,12 @@
-import json
+from django.shortcuts import render
 
-from django.http import HttpResponse
 from .models import Pokemon
 
 
 def index(request):
-    result_set = Pokemon.objects.values('code', 'name', 'description').all()
-    data = json.dumps(list(result_set))
-    return HttpResponse(data, content_type='application/json')
+    result_set = Pokemon.objects.all()
+    return render(request, 'pokedex/index.html', context={'pokemons': result_set})
+
+
+def about(request):
+    return render(request, 'pokedex/about.html')

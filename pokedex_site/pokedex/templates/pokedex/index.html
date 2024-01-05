@@ -1,0 +1,7 @@
+{% extends 'pokedex/layout.html' %}
+
+{% block content %}
+<div class="grid grid-cols-3 gap-4">
+    {% include "./items.html" with data=pokemons %}
+</div>
+{% endblock %}
