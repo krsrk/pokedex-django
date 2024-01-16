@@ -5,7 +5,10 @@ from .models import Pokemon
 
 def index(request):
     result_set = Pokemon.objects.all()
-    return render(request, 'pokedex/index.html', context={'pokemons': result_set})
+    return render(request, 'pokedex/index.html', context={
+        'pokemons': Pokemon.to_dict(result_set),
+        'msg': 'The Pokedex'
+    })
 
 
 def about(request):

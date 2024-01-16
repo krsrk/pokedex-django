@@ -15,6 +15,23 @@ class Pokemon(models.Model):
     def __str__(self):
         return self.name
 
+    @staticmethod
+    def to_dict(data):
+        data_dict = []
+        for item in data:
+            data_dict.append({
+                'id': item.id,
+                'code': item.code,
+                'name': item.name,
+                'description': item.description,
+                'height': str(item.height),
+                'weight': str(item.weight),
+                'ability': item.ability,
+                'image_url': item.image_url,
+                'more_info_url': item.more_info_url,
+            })
+        return data_dict
+
     @property
     def more_info_url(self):
         name = str(self.name).lower()

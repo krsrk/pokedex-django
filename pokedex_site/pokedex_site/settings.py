@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-k__wc_zvq5ss#&8lvy!w7d#==-(gdp+f5+@_0l=5%*d_#*5s_h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_vite',
 ]
 
 MIDDLEWARE = [
@@ -116,7 +117,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/' if DEBUG else 'http://localhost:4174/static/'
+
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / "pokedex" / "static" / "dist"
+
+DJANGO_VITE_DEV_MODE = DEBUG
+
+DJANGO_VITE_DEV_SERVER_PORT = 3000
+
+DJANGO_VITE_MANIFEST_PATH = BASE_DIR / "pokedex" / "static" / "dist" / "assets" / ".vite" / "manifest.json"
+
+STATIC_ROOT = BASE_DIR / "collectedstatic"
+
+STATICFILES_DIRS = [DJANGO_VITE_ASSETS_PATH]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
